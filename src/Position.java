@@ -6,25 +6,21 @@ public class Position {
 	public char turn;
 	public int dimension = 3;
 	
-	//CONSTRUCTOR
 	public Position() {
 		this.board = "         ".toCharArray(); //array of 9 spaces
 		this.turn = 'x';
 	}
 
-	//CONSTRUCTOR
 	public Position(char[] board, char turn) {
 		this.board = board;
 		this.turn = turn;
 	}
-	
-	//CONSTRUCTOR
+
 	public Position(String str) {
 		this.board = str.toCharArray();
 		this.turn = 'x';
 	}
 	
-	//CONSTRUCTOR
 	public Position(String str, char turn) {
 		this.board = str.toCharArray();
 		this.turn = turn;
@@ -92,7 +88,6 @@ public class Position {
 		}
 		
 		return mm + (turn == 'x' ? -1 : 1) - 1;
-		//ex: if turn is x then -> mm + (-1) - 1
 	}
 	
 	public int bestMove() {
@@ -107,6 +102,10 @@ public class Position {
 		}
 		
 		return best;
+	}
+	
+	public boolean gameIsOver() {
+		return (win('x') || win('o') || possibleMoves().length == 0);
 	}
 	
 	

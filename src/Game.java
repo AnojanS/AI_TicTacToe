@@ -1,7 +1,9 @@
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
+import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
@@ -10,7 +12,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 public class Game {
-	Position position;
+	Position position = new Position();
 	
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -20,20 +22,41 @@ public class Game {
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setLayout(new GridLayout(3,3));
 				
-				Game game = new Game();
+				final Game game = new Game();
+				final JButton[] buttons = new JButton[9];
 				
 				for (int i = 0; i < 9; i++) {
 					final int idx = i;
-					JButton button  = new JButton();
+					final JButton button  = new JButton();
+					buttons[i] = button;
 					button.setPreferredSize(new Dimension(100,100));
 					button.setBackground(Color.BLACK);
 					button.setOpaque(true);
+					button.setFont(new Font(null,Font.ROMAN_BASELINE,75));
 					button.addMouseListener(new MouseListener() {
 
 						@Override
 						public void mouseClicked(MouseEvent e) {
-							button.setText("" + idx);
+							button.setText("" + game.position.turn);
+							game.move(idx);
 							
+							if (!game.position.gameIsOver()) {
+								buttons[game.position.bestMove()].setText("" + game.position.turn);
+								game.move(game.position.bestMove());
+							
+							}
+							
+							if (game.position.gameIsOver()) {
+								String finalMessage = "";
+								if (game.position.win('x')) {
+									finalMessage = "Congratualtions, you've won!";
+								} else if (game.position.win('o')) {
+									finalMessage = "Looks like the computer wins";
+								} else {
+									finalMessage = "It's a draw";
+								}
+								JOptionPane.showMessageDialog(null, finalMessage);
+							}
 						}
 						
 						public void mousePressed(MouseEvent e) {}
@@ -49,6 +72,10 @@ public class Game {
 			}
 		});
 
+	}
+
+	protected void move(int idx) {
+		position = position.move(idx);
 	}
 
 }
