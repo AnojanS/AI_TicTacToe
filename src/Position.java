@@ -92,7 +92,7 @@ public class Position {
 		}
 		
 		return mm + (turn == 'x' ? -1 : 1) - 1;
-		//if turn is x then mm + (-1) -1
+		//ex: if turn is x then -> mm + (-1) - 1
 	}
 	
 	public int bestMove() {
