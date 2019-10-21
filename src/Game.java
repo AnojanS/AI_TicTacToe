@@ -51,11 +51,12 @@ public class Game {
 								if (game.position.win('x')) {
 									finalMessage = "Congratualtions, you've won!";
 								} else if (game.position.win('o')) {
-									finalMessage = "Looks like the computer wins";
+									finalMessage = "Sorry, its a win for the computer";
 								} else {
-									finalMessage = "It's a draw";
+									finalMessage = "It's a draw!";
 								}
 								JOptionPane.showMessageDialog(null, finalMessage);
+								frame.setEnabled(false);
 							}
 						}
 						
