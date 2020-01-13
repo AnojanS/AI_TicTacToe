@@ -18,7 +18,7 @@ public class Game {
 		SwingUtilities.invokeLater(new Runnable() {
 			
 			public void run() {
-				JFrame frame = new JFrame ("Tic-tac-toe in Java");
+				JFrame frame = new JFrame ("Minimax Tic-Tac-Toe");
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setLayout(new GridLayout(3,3));
 				
@@ -51,9 +51,9 @@ public class Game {
 								if (game.position.win('x')) {
 									finalMessage = "Congratualtions, you've won!";
 								} else if (game.position.win('o')) {
-									finalMessage = "Sorry, its a win for the computer";
+									finalMessage = "Sorry, computer wins";
 								} else {
-									finalMessage = "It's a draw!";
+									finalMessage = "It's a draw";
 								}
 								JOptionPane.showMessageDialog(null, finalMessage);
 								frame.setEnabled(false);
